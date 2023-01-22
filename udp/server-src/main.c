@@ -43,8 +43,8 @@ int main(void) {
          (const struct sockaddr *)&cliaddr, slen);
   puts("hello message send");
 
-  close(server_fd);
   shutdown(server_fd, SHUT_RDWR);
+  close(server_fd);
 
   return EXIT_SUCCESS;
 }

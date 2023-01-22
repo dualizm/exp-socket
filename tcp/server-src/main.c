@@ -55,8 +55,8 @@ int main(void) {
   send(new_socket, hello, sizeof hello, 0);
   puts("Hello message sent");
 
-  close(new_socket);
   shutdown(server_fd, SHUT_RDWR);
+  close(new_socket);
 
   return EXIT_SUCCESS;
 }
