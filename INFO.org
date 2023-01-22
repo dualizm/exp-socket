@@ -1,0 +1,42 @@
+#+title: Info
+
+* example socket
+#include <netinet/in.h> /* sockaddr_in*/
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <sys/socket.h> /* socket() */
+#include <sys/un.h>     /* sockaddr_un */
+
+int main(void) {
+  int s = socket(AF_INET, SOCK_STREAM, 0);
+
+  /* for IPv4 */
+  struct sockaddr_in sa; /* struct sockaddr_in6 (IPv6) */
+  sa.sin_family = AF_INET;
+  sa.sin_port = htons(12345);
+  sa.sin_addr.s_addr = htonl(INADDR_LOOPBACK);
+  inet_addr("10.0.0.1") string -> int
+  inet_pton(AP_INET, '10.0.0.1', &(sa.sin_addr));
+  bind(s, &sa, sizeof(sa));
+
+  /* for Unix socket */
+  struct sockaddr_un su;
+  su.sun_family = AF_UNIX;
+  char ufs[] = "/tmp/a.sock";
+  strncpy(su.sun_path, "/tmp/a.sock", sizeof ufs);
+
+  /* for server */
+  int s = socket(AF_INET, SOCK_STREAM, 0);
+  listen(s, SOMAXCONN);
+  while (accept(s, 0, 0)) {
+    size_t read(int fd, void *buff, size_t count)
+    -> recv (..., int flags) MSG_NOSIGNAL
+    size_t write(int fd, const void *buff, size_t count)
+    -> send (..., int flags) MSG_NOSIGNAL
+  }
+
+
+
+  return EXIT_SUCCESS;
+}
